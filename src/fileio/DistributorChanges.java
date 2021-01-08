@@ -1,0 +1,34 @@
+package fileio;
+
+/**
+ * Class that contains distributor changes
+ */
+public final class DistributorChanges {
+    private int id;
+    private int infrastructureCost;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
+    public int getInfrastructureCost() {
+        return infrastructureCost;
+    }
+
+    public void setInfrastructureCost(final int infrastructureCost) {
+        this.infrastructureCost = infrastructureCost;
+    }
+
+    // for debugging
+    @Override
+    public String toString() {
+        return "DistributorChanges{" +
+                "\nid=" + id +
+                "\ninfrastructureCost=" + infrastructureCost +
+                "}\n";
+    }
+}
