@@ -1,0 +1,4 @@
+Starting audit...
+[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/strategies/EnergyChoiceStrategyType.java:10:25: Variable 'label' must be private and have accessor methods. [VisibilityModifier]
+Audit done.
+Checkstyle ends with 1 errors.
