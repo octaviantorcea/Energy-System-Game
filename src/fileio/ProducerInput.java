@@ -51,16 +51,4 @@ public final class ProducerInput {
     public void setEnergyPerDistributor(final int energyPerDistributor) {
         this.energyPerDistributor = energyPerDistributor;
     }
-
-    // for debugging
-    @Override
-    public String toString() {
-        return "ProducerInput{" +
-                "\nid=" + id +
-                "\nenergyType=" + energyType +
-                "\nmaxDistributors=" + maxDistributors +
-                "\npriceKW=" + priceKW +
-                "\nenergyPerDistributor=" + energyPerDistributor +
-                "}\n";
-    }
 }

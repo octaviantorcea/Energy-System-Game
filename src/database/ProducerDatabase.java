@@ -18,4 +18,12 @@ public final class ProducerDatabase {
     public List<Producer> getProducers() {
         return producers;
     }
+
+    //for debugging
+    @Override
+    public String toString() {
+        return "ProducerDatabase{" +
+                "producers=" + producers +
+                '}';
+    }
 }

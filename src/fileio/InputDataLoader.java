@@ -39,14 +39,4 @@ public final class InputDataLoader {
     public void setMonthlyUpdates(final List<MonthlyUpdates> monthlyUpdates) {
         this.monthlyUpdates = monthlyUpdates;
     }
-
-    // for debugging
-    @Override
-    public String toString() {
-        return "InputDataLoader{\n"
-                + "numberOfTurns=" + numberOfTurns
-                + "\ninitialData=" + initialData
-                + "\nmonthlyUpdates=" + monthlyUpdates
-                + '}';
-    }
 }

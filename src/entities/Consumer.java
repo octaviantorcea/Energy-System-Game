@@ -96,4 +96,20 @@ public final class Consumer {
     public Distributor getPenaltyDistributor() {
         return penaltyDistributor;
     }
+
+    //for debugging
+
+    @Override
+    public String toString() {
+        return "\nid=" + id +
+                "\nisBankrupt=" + isBankrupt +
+                "\nbudget=" + budget +
+                "\nmonthlyIncome=" + monthlyIncome +
+                "\ncontract=" + contract +
+                "\nhasContract=" + hasContract +
+                "\npenalty=" + penalty +
+                "\nhasPenalty=" + hasPenalty +
+                "\npenaltyDistributor=" + penaltyDistributor +
+                "}\n";
+    }
 }

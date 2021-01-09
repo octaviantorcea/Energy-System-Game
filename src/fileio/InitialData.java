@@ -42,15 +42,4 @@ public final class InitialData {
     public void setProducers(final List<ProducerInput> producers) {
         this.producers = producers;
     }
-
-    // for debugging
-
-    @Override
-    public String toString() {
-        return "InitialData{"
-                + "\nconsumers=" + consumers
-                + "\ndistributors=" + distributors
-                + "\nproducers=" + producers
-                + '}';
-    }
 }

@@ -18,4 +18,12 @@ public final class ConsumerDatabase {
     public List<Consumer> getConsumers() {
         return consumers;
     }
+
+    //for debugging
+    @Override
+    public String toString() {
+        return "ConsumerDatabase{" +
+                "consumers=" + consumers +
+                '}';
+    }
 }

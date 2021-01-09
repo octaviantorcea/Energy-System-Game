@@ -22,13 +22,4 @@ public final class ProducerChanges {
     public void setEnergyPerDistributor(final int energyPerDistributor) {
         this.energyPerDistributor = energyPerDistributor;
     }
-
-    // for debugging
-    @Override
-    public String toString() {
-        return "ProducerChanges{" +
-                "\nid=" + id +
-                "\nenergyPerDistributor=" + energyPerDistributor +
-                "}\n";
-    }
 }

@@ -42,13 +42,4 @@ public final class MonthlyUpdates {
     public void setProducerChanges(final List<ProducerChanges> producerChanges) {
         this.producerChanges = producerChanges;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "\nnewConsumers=" + newConsumers +
-                "\ndistributorChanges=" + distributorChanges +
-                "\nproducerChanges=" + producerChanges +
-                "}\n";
-    }
 }

@@ -22,13 +22,4 @@ public final class DistributorChanges {
     public void setInfrastructureCost(final int infrastructureCost) {
         this.infrastructureCost = infrastructureCost;
     }
-
-    // for debugging
-    @Override
-    public String toString() {
-        return "DistributorChanges{" +
-                "\nid=" + id +
-                "\ninfrastructureCost=" + infrastructureCost +
-                "}\n";
-    }
 }

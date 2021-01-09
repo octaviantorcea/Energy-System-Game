@@ -18,4 +18,12 @@ public final class DistributorDatabase {
     public List<Distributor> getDistributors() {
         return distributors;
     }
+
+    //for debugging
+    @Override
+    public String toString() {
+        return "DistributorDatabase{" +
+                "distributors=" + distributors +
+                '}';
+    }
 }

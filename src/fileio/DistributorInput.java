@@ -60,17 +60,4 @@ public final class DistributorInput {
     public void setProducerStrategy(final EnergyChoiceStrategyType producerStrategy) {
         this.producerStrategy = producerStrategy;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "DistributorInput{" +
-                "\nid=" + id +
-                "\ncontractLength=" + contractLength +
-                "\ninitialBudget=" + initialBudget +
-                "\ninitialInfrastructureCost=" + initialInfrastructureCost +
-                "\nenergyNeededKW=" + energyNeededKW +
-                "\nproducerStrategy=" + producerStrategy +
-                "}\n";
-    }
 }

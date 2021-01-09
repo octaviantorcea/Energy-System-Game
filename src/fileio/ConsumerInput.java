@@ -31,14 +31,4 @@ public final class ConsumerInput {
     public void setMonthlyIncome(final int monthlyIncome) {
         this.monthlyIncome = monthlyIncome;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "ConsumerInput{" +
-                "\nid=" + id +
-                "\ninitialBudget=" + initialBudget +
-                "\nmonthlyIncome=" + monthlyIncome +
-                "}\n";
-    }
 }
