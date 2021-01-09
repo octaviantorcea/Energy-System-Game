@@ -48,14 +48,24 @@ public final class Simulation {
         initialData.getDistributors().forEach(distributorInput ->
                 distributorDB.getDistributors().add(new Distributor(distributorInput)));
 
-        initialData.getProducers().forEach(producerInput ->
-                producerDB.getProducers().add(new Producer(producerInput)));
+        initialData.getProducers().forEach(producerInput -> {
+            Producer newProducer = new Producer(producerInput);
+            producerDB.getProducers().add(newProducer);
+
+            if (producerInput.getEnergyType().isRenewable()) {
+                producerDB.getGreenProducers().add(newProducer);
+            } else {
+                producerDB.getNonGreenProducers().add(newProducer);
+            }
+        });
+
+        producerDB.sortAuxiliaryLists();
+        distributorDB.getDistributors().forEach(distributor -> distributor.setStrategy(producerDB));
     }
 
     private void simulateInitRound(final ConsumerDatabase consumerDB,
                                     final DistributorDatabase distributorDB,
                                     final ProducerDatabase producerDB) {
-
     }
 
     /**

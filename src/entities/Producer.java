@@ -5,11 +5,12 @@ import fileio.ProducerInput;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Class that contains data about a producer and specific methods
  */
-public final class Producer {
+public final class Producer extends Observable {
     private int id;
     private int maxDistributors;
     private double priceKW;
@@ -25,6 +26,23 @@ public final class Producer {
         this.priceKW = producerInput.getPriceKW();
         this.energyType = producerInput.getEnergyType();
         this.energyPerDistributor = producerInput.getEnergyPerDistributor();
+        this.subscribedDistributors = 0;
+    }
+
+    public boolean canHaveMoreDistributors() {
+        return subscribedDistributors != maxDistributors;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getPriceKW() {
+        return priceKW;
+    }
+
+    public int getEnergyPerDistributor() {
+        return energyPerDistributor;
     }
 
     //for debugging
