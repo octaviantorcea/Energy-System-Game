@@ -33,6 +33,8 @@ public final class Main {
 
         game.run(allData, consumerDatabase, distributorDatabase, producerDatabase);
 
+
+
         // for debugging
         System.out.println(consumerDatabase);
         System.out.println(distributorDatabase);

@@ -1,6 +1,7 @@
 package database;
 
 import entities.Producer;
+import fileio.ProducerChanges;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,6 +33,10 @@ public final class ProducerDatabase {
 
         greenProducers.sort(comparePriceQuantity);
         nonGreenProducers.sort(comparePriceQuantity);
+    }
+
+    public void saveMonthlyStats(int month) {
+        producers.forEach(producer -> producer.saveMonthlyStats(month));
     }
 
     public List<Producer> getProducers() {

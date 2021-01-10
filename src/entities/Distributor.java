@@ -1,6 +1,7 @@
 package entities;
 
 import database.ProducerDatabase;
+import fileio.DistributorChanges;
 import fileio.DistributorInput;
 import strategies.ChooseProducerStrategy;
 import strategies.EnergyChoiceStrategyType;
@@ -53,6 +54,8 @@ public final class Distributor implements Observer {
                 producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() + 1);
                 producer.getSubscribedDistributors().add(this);
             });
+
+            needNewProducers = false;
         }
     }
 
@@ -107,6 +110,20 @@ public final class Distributor implements Observer {
 
             contracts.clear();
         }
+
+        if (isBankrupt && !energyProducers.isEmpty()) {
+            energyProducers.forEach(producer -> {
+                producer.deleteObserver(this);
+                producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
+                producer.getSubscribedDistributors().remove(this);
+            });
+
+            energyProducers.clear();
+        }
+    }
+
+    public void modifyInfCost(final DistributorChanges distributorChanges) {
+        infrastructureCost = distributorChanges.getInfrastructureCost();
     }
 
     private int computeFees() {
@@ -145,6 +162,14 @@ public final class Distributor implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         needNewProducers = true;
+
+        energyProducers.forEach(producer -> {
+            producer.deleteObserver(this);
+            producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
+            producer.getSubscribedDistributors().remove(this);
+        });
+
+        energyProducers.clear();
     }
 
     //for debugging

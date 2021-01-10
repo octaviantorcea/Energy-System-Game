@@ -1,5 +1,6 @@
 package entities;
 
+import fileio.ProducerChanges;
 import fileio.ProducerInput;
 
 import java.util.ArrayList;
@@ -31,6 +32,18 @@ public final class Producer extends Observable {
 
     public boolean canHaveMoreDistributors() {
         return nrOfSubbedDistributors != maxDistributors;
+    }
+
+    public void saveMonthlyStats(int month) {
+        List<Integer> subbedDistIds = new ArrayList<>();
+        subscribedDistributors.forEach(distributor -> subbedDistIds.add(distributor.getId()));
+        monthlyStats.add(new MonthlyStats(month, subbedDistIds));
+    }
+
+    public void modifyProducer(ProducerChanges producerChanges) {
+        setChanged();
+        energyPerDistributor = producerChanges.getEnergyPerDistributor();
+        notifyObservers();
     }
 
     public int getId() {

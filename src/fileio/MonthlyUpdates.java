@@ -1,5 +1,12 @@
 package fileio;
 
+import database.ConsumerDatabase;
+import database.DistributorDatabase;
+import database.ProducerDatabase;
+import entities.Consumer;
+import entities.Distributor;
+import entities.Producer;
+
 import java.util.List;
 
 /**
@@ -18,6 +25,30 @@ public final class MonthlyUpdates {
      * List of changes for producers
      */
     private List<ProducerChanges> producerChanges;
+
+    /**
+     * applies all cost changes
+     * @param distributorDB distributor database
+     * @see Distributor#modifyInfCost
+     */
+    public void changeInfCosts(final DistributorDatabase distributorDB) {
+        distributorChanges.forEach(costsChange -> {
+            Distributor modifiedDistr = distributorDB.getDistributors().get(costsChange.getId());
+            modifiedDistr.modifyInfCost(costsChange);
+        });
+    }
+
+    public void addNewConsumers(final ConsumerDatabase consumerDB) {
+        newConsumers.forEach(newConsumer ->
+                consumerDB.getConsumers().add(new Consumer(newConsumer)));
+    }
+
+    public void modifyProducers(final ProducerDatabase producerDB) {
+        producerChanges.forEach(producerChange -> {
+            Producer modifiedProducer = producerDB.getProducers().get(producerChange.getId());
+            modifiedProducer.modifyProducer(producerChange);
+        });
+    }
 
     public List<ConsumerInput> getNewConsumers() {
         return newConsumers;

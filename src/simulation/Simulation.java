@@ -33,21 +33,9 @@ public final class Simulation {
         initialization(allData, consumerDB, distributorDB, producerDB);
         simulateInitRound(consumerDB, distributorDB, producerDB);
 
-        //mockup
-        for (MonthlyUpdates monthlyUpdates : allData.getMonthlyUpdates()) {
-            simulateInitRound(consumerDB, distributorDB, producerDB);
-
-            //need to delete below this; it's just for debugging
-            producerDB.getProducers().forEach(producer -> {
-                List<MonthlyStats> monthlyStats = producer.getMonthlyStats();
-                List<Distributor> monthlyDistributors = producer.getSubscribedDistributors();
-                List<Integer> ids = new ArrayList<>();
-                monthlyDistributors.forEach(distributor -> ids.add(distributor.getId()));
-
-                monthlyStats.add(new MonthlyStats(69, ids));
-                producer.getSubscribedDistributors().clear();
-            });
-            producerDB.getProducers().forEach(producer -> producer.setNrOfSubbedDistributors(0));
+        for (int i = 1; i <= allData.getNumberOfTurns(); i++) {
+            simulateNormalRound(consumerDB, distributorDB, producerDB,
+                    allData.getMonthlyUpdates().get(i - 1), i);
         }
     }
 
@@ -95,6 +83,27 @@ public final class Simulation {
         consumerDB.payContracts();
         distributorDB.payAllFees();
         consumerDB.verifyBankruptcies();
+        distributorDB.declareAllBankruptcies();
+    }
+
+    private void simulateNormalRound(final ConsumerDatabase consumerDB,
+                                     final DistributorDatabase distributorDB,
+                                     final ProducerDatabase producerDB,
+                                     final MonthlyUpdates monthlyUpdates,
+                                     final int month) {
+        monthlyUpdates.changeInfCosts(distributorDB);
+        monthlyUpdates.addNewConsumers(consumerDB);
+        distributorDB.computeContractPrices();
+        consumerDB.addAllIncomes();
+        consumerDB.signContracts(distributorDB);
+        consumerDB.payContracts();
+        distributorDB.payAllFees();
+        //<------------???why not here???-----------------------producerDB.saveMonthlyStats(month);
+        distributorDB.declareAllBankruptcies();
+        monthlyUpdates.modifyProducers(producerDB);
+        distributorDB.chooseProducers(producerDB);
+        distributorDB.computeProductionCosts();
+        producerDB.saveMonthlyStats(month);
     }
 
     /**
