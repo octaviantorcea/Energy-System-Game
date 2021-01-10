@@ -26,14 +26,14 @@ public final class DistributorDatabase {
         return needNewProducers;
     }
 
-    public void chooseInitialProducers(ProducerDatabase producerDatabase) {
-        distributors.forEach(distributor -> distributor.chooseProducers(producerDatabase));
+    public void chooseInitialProducers() {
+        distributors.forEach(Distributor::chooseProducers);
     }
 
-    public void chooseProducers(ProducerDatabase producerDatabase) {
+    public void chooseProducers() {
         Comparator<Distributor> idComparator = Comparator.comparing(Distributor::getId);
         needNewProducers.sort(idComparator);
-        needNewProducers.forEach(distributor -> distributor.chooseNewProducers(producerDatabase));
+        needNewProducers.forEach(Distributor::chooseNewProducers);
     }
 
     public void computeProductionCosts() {

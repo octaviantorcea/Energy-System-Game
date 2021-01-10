@@ -22,17 +22,16 @@ import static utils.Constants.PROFIT_RATE;
  */
 @SuppressWarnings("deprecation")
 public final class Distributor implements Observer {
-    private int id;
-    private int energyNeededKW;
+    private final int id;
+    private final int energyNeededKW;
     private int contractCost;
     private int budget;
-    private EnergyChoiceStrategyType producerStrategy;
+    private final EnergyChoiceStrategyType producerStrategy;
     private boolean isBankrupt;
-    private Map<Consumer, Contract> contracts = new LinkedHashMap<>();
-    private int contractLength;
+    private final Map<Consumer, Contract> contracts = new LinkedHashMap<>();
+    private final int contractLength;
     private int infrastructureCost;
     private int productionCost;
-    private boolean needNewProducers;
     private ChooseProducerStrategy strategy;
     private List<Producer> energyProducers;
 
@@ -43,7 +42,6 @@ public final class Distributor implements Observer {
         this.infrastructureCost = distributorInput.getInitialInfrastructureCost();
         this.energyNeededKW = distributorInput.getEnergyNeededKW();
         this.producerStrategy = distributorInput.getProducerStrategy();
-        this.needNewProducers = true;
         this.isBankrupt = false;
     }
 
@@ -52,7 +50,7 @@ public final class Distributor implements Observer {
                 .createStrategy(producerStrategy, energyNeededKW, producerDatabase);
     }
 
-    public void chooseProducers(ProducerDatabase producerDatabase) {
+    public void chooseProducers() {
         if (!this.isBankrupt) {
             energyProducers = this.strategy.getNecessaryProducers(); // puts every producer in list
             energyProducers.forEach(producer -> {
@@ -130,7 +128,7 @@ public final class Distributor implements Observer {
         infrastructureCost = distributorChanges.getInfrastructureCost();
     }
 
-    public void chooseNewProducers(ProducerDatabase producerDatabase) {
+    public void chooseNewProducers() {
         energyProducers.forEach(producer -> {
             producer.deleteObserver(this);
             producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
@@ -139,7 +137,7 @@ public final class Distributor implements Observer {
 
         energyProducers.clear();
 
-        chooseProducers(producerDatabase);
+        chooseProducers();
     }
 
     private int computeFees() {
@@ -185,7 +183,6 @@ public final class Distributor implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        needNewProducers = true;
         ((DistributorDatabase) arg).getNeedNewProducers().add(this);
     }
 }

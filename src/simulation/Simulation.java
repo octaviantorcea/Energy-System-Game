@@ -27,7 +27,7 @@ public final class Simulation {
                     final DistributorDatabase distributorDB,
                     final ProducerDatabase producerDB) {
         initialization(allData, consumerDB, distributorDB, producerDB);
-        simulateInitRound(consumerDB, distributorDB, producerDB);
+        simulateInitRound(consumerDB, distributorDB);
 
         for (int i = 1; i <= allData.getNumberOfTurns(); i++) {
             simulateNormalRound(consumerDB, distributorDB, producerDB,
@@ -69,9 +69,8 @@ public final class Simulation {
     }
 
     private void simulateInitRound(final ConsumerDatabase consumerDB,
-                                    final DistributorDatabase distributorDB,
-                                    final ProducerDatabase producerDB) {
-        distributorDB.chooseInitialProducers(producerDB);
+                                    final DistributorDatabase distributorDB) {
+        distributorDB.chooseInitialProducers();
         distributorDB.computeProductionCosts();
         baseOperations(consumerDB, distributorDB);
     }
@@ -85,7 +84,7 @@ public final class Simulation {
         monthlyUpdates.addNewConsumers(consumerDB);
         baseOperations(consumerDB, distributorDB);
         monthlyUpdates.modifyProducers(producerDB, distributorDB);
-        distributorDB.chooseProducers(producerDB);
+        distributorDB.chooseProducers();
         distributorDB.getNeedNewProducers().clear();
         distributorDB.computeProductionCosts();
         producerDB.saveMonthlyStats(month);

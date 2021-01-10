@@ -23,7 +23,7 @@ public final class Producer extends Observable {
     @JsonIgnore
     private int nrOfSubbedDistributors;
     @JsonIgnore
-    private List<Distributor> subscribedDistributors = new ArrayList<>();
+    private final List<Distributor> subscribedDistributors = new ArrayList<>();
 
     public Producer(ProducerInput producerInput) {
         this.id = producerInput.getId();
