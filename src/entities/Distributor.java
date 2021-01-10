@@ -114,6 +114,10 @@ public final class Distributor implements Observer {
         return infrastructureCost + productionCost * nrClients;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getContractCost() {
         return contractCost;
     }

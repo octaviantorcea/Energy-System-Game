@@ -5,10 +5,14 @@ import database.DistributorDatabase;
 import database.ProducerDatabase;
 import entities.Consumer;
 import entities.Distributor;
+import entities.MonthlyStats;
 import entities.Producer;
 import fileio.InitialData;
 import fileio.InputDataLoader;
 import fileio.MonthlyUpdates;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Simulation {
     private static Simulation instance = null;
@@ -33,7 +37,16 @@ public final class Simulation {
         for (MonthlyUpdates monthlyUpdates : allData.getMonthlyUpdates()) {
             simulateInitRound(consumerDB, distributorDB, producerDB);
 
-            //need to delete this it's just for debugging
+            //need to delete below this; it's just for debugging
+            producerDB.getProducers().forEach(producer -> {
+                List<MonthlyStats> monthlyStats = producer.getMonthlyStats();
+                List<Distributor> monthlyDistributors = producer.getSubscribedDistributors();
+                List<Integer> ids = new ArrayList<>();
+                monthlyDistributors.forEach(distributor -> ids.add(distributor.getId()));
+
+                monthlyStats.add(new MonthlyStats(69, ids));
+                producer.getSubscribedDistributors().clear();
+            });
             producerDB.getProducers().forEach(producer -> producer.setNrOfSubbedDistributors(0));
         }
     }

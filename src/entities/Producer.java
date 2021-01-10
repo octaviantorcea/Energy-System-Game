@@ -45,6 +45,10 @@ public final class Producer extends Observable {
         return energyPerDistributor;
     }
 
+    public List<MonthlyStats> getMonthlyStats() {
+        return monthlyStats;
+    }
+
     public int getNrOfSubbedDistributors() {
         return nrOfSubbedDistributors;
     }
