@@ -8,7 +8,7 @@ import java.util.List;
 
 import static utils.Constants.FIRST;
 
-public final class GreenStrategy extends AbstractStrategy{
+public final class GreenStrategy extends AbstractStrategy {
     public GreenStrategy(final int energyNeededKW, final ProducerDatabase producerDatabase) {
         super(energyNeededKW, producerDatabase);
     }

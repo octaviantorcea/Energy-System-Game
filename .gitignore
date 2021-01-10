@@ -5,3 +5,5 @@
 /.idea/vcs.xml
 /out/production/OOP-Project-2/checker/checkstyle-8.36.2-all.jar
 /out/production/OOP-Project-2/checker/poo_checks.xml
+/results.out
+/test.json

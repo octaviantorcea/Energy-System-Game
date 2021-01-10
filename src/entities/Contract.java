@@ -74,13 +74,4 @@ public final class Contract {
     public Distributor getDistributor() {
         return distributor;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "\nconsumerId=" + consumerId +
-                "\nprice=" + price +
-                "\nremainedContractMonths=" + remainedContractMonths +
-                "}\n";
-    }
 }

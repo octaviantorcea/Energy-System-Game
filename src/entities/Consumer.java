@@ -85,7 +85,7 @@ public final class Consumer {
     public void payContract() {
         if (!this.isBankrupt) {
             if (this.hasPenalty) { // if it has penalty
-                if (this.penaltyDistributor == contract.getDistributor()) { // and has the same distr
+                if (this.penaltyDistributor == contract.getDistributor()) { // and has the same dis
                     if (contract.getPrice() + penalty > budget) { // and can't pay
                         isBankrupt = true;
                         return;
@@ -100,7 +100,8 @@ public final class Consumer {
                         } else { // can pay at least the penalty
                             budget -= penalty;
                             penaltyDistributor.setBudget(penaltyDistributor.getBudget() + penalty);
-                            penalty = (int) Math.round(Math.floor(PENALTY_RATE * contract.getPrice()));
+                            penalty = (int) Math.round(Math.floor(PENALTY_RATE
+                                                                    * contract.getPrice()));
                             penaltyDistributor = contract.getDistributor();
                             contract.setRemainedContractMonths(contract.getRemainedContractMonths()
                                                                     - 1);
@@ -182,15 +183,5 @@ public final class Consumer {
 
     public Distributor getPenaltyDistributor() {
         return penaltyDistributor;
-    }
-
-    //for debugging
-
-    @Override
-    public String toString() {
-        return "\nid=" + id +
-                "\nisBankrupt=" + isBankrupt +
-                "\nbudget=" + budget +
-                "}\n";
     }
 }

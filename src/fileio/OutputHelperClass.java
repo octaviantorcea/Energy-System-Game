@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Class that contains all the necessary data for output
  */
-public class OutputHelperClass {
+public final class OutputHelperClass {
     /**
      * List of all consumers
      */

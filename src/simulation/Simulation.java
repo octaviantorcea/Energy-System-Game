@@ -5,14 +5,10 @@ import database.DistributorDatabase;
 import database.ProducerDatabase;
 import entities.Consumer;
 import entities.Distributor;
-import entities.MonthlyStats;
 import entities.Producer;
 import fileio.InitialData;
 import fileio.InputDataLoader;
 import fileio.MonthlyUpdates;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class Simulation {
     private static Simulation instance = null;

@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static utils.Constants.FIRST;
-
-public final class PriceStrategy extends AbstractStrategy{
+public final class PriceStrategy extends AbstractStrategy {
     public PriceStrategy(final int energyNeededKW, final ProducerDatabase producerDatabase) {
         super(energyNeededKW, producerDatabase);
     }

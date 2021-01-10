@@ -7,8 +7,13 @@ import strategies.ChooseProducerStrategy;
 import strategies.EnergyChoiceStrategyType;
 import strategies.StrategyFactory;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
+import static utils.Constants.PRODUCTION_COST_RATE;
 import static utils.Constants.PROFIT_RATE;
 
 /**
@@ -67,7 +72,7 @@ public final class Distributor implements Observer {
                 cost += producer.getEnergyPerDistributor() * producer.getPriceKW();
             }
 
-            productionCost = (int) Math.round(Math.floor(cost / 10));
+            productionCost = (int) Math.round(Math.floor(cost / PRODUCTION_COST_RATE));
         }
     }
 
