@@ -27,7 +27,8 @@ public final class ProducerDatabase {
 
     public void sortAuxiliaryLists() {
         Comparator<Producer> comparePriceQuantity = Comparator.comparing(Producer::getPriceKW)
-                .thenComparing(Producer::getEnergyPerDistributor).thenComparing(Producer::getId);
+                .thenComparing(Producer::getEnergyPerDistributor, Comparator.reverseOrder())
+                .thenComparing(Producer::getId);
 
         greenProducers.sort(comparePriceQuantity);
         nonGreenProducers.sort(comparePriceQuantity);

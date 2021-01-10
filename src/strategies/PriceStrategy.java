@@ -21,7 +21,8 @@ public final class PriceStrategy extends AbstractStrategy{
         List<Producer> availableProducers = new ArrayList<>(producerDatabase.getProducers());
 
         Comparator<Producer> comparePriceQuantity = Comparator.comparing(Producer::getPriceKW)
-                .thenComparing(Producer::getEnergyPerDistributor).thenComparing(Producer::getId);
+                .thenComparing(Producer::getEnergyPerDistributor, Comparator.reverseOrder())
+                .thenComparing(Producer::getId);
 
         availableProducers.sort(comparePriceQuantity);
 

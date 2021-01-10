@@ -19,6 +19,53 @@ public final class DistributorDatabase {
         return distributors;
     }
 
+    public void chooseProducers(ProducerDatabase producerDatabase) {
+        distributors.forEach(distributor -> distributor.chooseProducers(producerDatabase));
+    }
+
+    public void computeProductionCosts() {
+        distributors.forEach(Distributor::computeProductionCost);
+    }
+
+    public void computeContractPrices() {
+        distributors.forEach(Distributor::computeContractCost);
+    }
+
+    public Distributor findBestContract() {
+        Distributor bestDistributor = null;
+
+        for (Distributor toCompare : distributors) {
+            if (!toCompare.isBankrupt()) {
+                if (bestDistributor == null) {
+                    bestDistributor = toCompare;
+                } else {
+                    if (toCompare.getContractCost() < bestDistributor.getContractCost()) {
+                        bestDistributor = toCompare;
+                    }
+                }
+            }
+        }
+
+        return bestDistributor;
+    }
+
+    /**
+     * Applies payFees method for all distributors
+     * @see Distributor#payFees()
+     */
+    public void payAllFees() {
+        distributors.forEach(Distributor::payFees);
+    }
+
+    /**
+     * Applies declareBankruptcy method for all distributors
+     * @see Distributor#declareBankruptcy()
+     */
+    public void declareAllBankruptcies() {
+        distributors.forEach(Distributor::declareBankruptcy);
+    }
+
+
     //for debugging
     @Override
     public String toString() {

@@ -18,7 +18,8 @@ public final class QuantityStrategy extends AbstractStrategy {
         int energyStillNeeded = energyNeededKW;
         List<Producer> availableProducers = new ArrayList<>(producerDatabase.getProducers());
 
-        Comparator<Producer> compareQuantity = Comparator.comparing(Producer::getEnergyPerDistributor)
+        Comparator<Producer> compareQuantity = Comparator
+                .comparing(Producer::getEnergyPerDistributor, Comparator.reverseOrder())
                 .thenComparing(Producer::getId);
 
         availableProducers.sort(compareQuantity);

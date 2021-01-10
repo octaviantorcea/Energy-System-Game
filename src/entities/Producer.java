@@ -1,6 +1,5 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.ProducerInput;
 
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Observable;
 /**
  * Class that contains data about a producer and specific methods
  */
+@SuppressWarnings("deprecation")
 public final class Producer extends Observable {
     private int id;
     private int maxDistributors;
@@ -17,8 +17,8 @@ public final class Producer extends Observable {
     private EnergyType energyType;
     private int energyPerDistributor;
     private List<MonthlyStats> monthlyStats = new ArrayList<>();
-    @JsonIgnore
-    private int subscribedDistributors;
+    private int nrOfSubbedDistributors;
+    private List<Distributor> subscribedDistributors = new ArrayList<>();
 
     public Producer(ProducerInput producerInput) {
         this.id = producerInput.getId();
@@ -26,11 +26,11 @@ public final class Producer extends Observable {
         this.priceKW = producerInput.getPriceKW();
         this.energyType = producerInput.getEnergyType();
         this.energyPerDistributor = producerInput.getEnergyPerDistributor();
-        this.subscribedDistributors = 0;
+        this.nrOfSubbedDistributors = 0;
     }
 
     public boolean canHaveMoreDistributors() {
-        return subscribedDistributors != maxDistributors;
+        return nrOfSubbedDistributors != maxDistributors;
     }
 
     public int getId() {
@@ -45,6 +45,18 @@ public final class Producer extends Observable {
         return energyPerDistributor;
     }
 
+    public int getNrOfSubbedDistributors() {
+        return nrOfSubbedDistributors;
+    }
+
+    public void setNrOfSubbedDistributors(int nrOfSubbedDistributors) {
+        this.nrOfSubbedDistributors = nrOfSubbedDistributors;
+    }
+
+    public List<Distributor> getSubscribedDistributors() {
+        return subscribedDistributors;
+    }
+
     //for debugging
     @Override
     public String toString() {
@@ -54,7 +66,7 @@ public final class Producer extends Observable {
                 "\nenergyType=" + energyType +
                 "\nenergyPerDistributor=" + energyPerDistributor +
                 "\nmonthlyStats=" + monthlyStats +
-                "\nsubscribedDistributors=" + subscribedDistributors +
+                "\nnrOfSubbedDistributors=" + nrOfSubbedDistributors +
                 "}\n";
     }
 }

@@ -7,4 +7,6 @@ public final class Constants {
     private Constants() { }
 
     public static final int FIRST = 0;
+    public static final double PROFIT_RATE = 0.2;
+    public static final double PENALTY_RATE = 1.2;
 }

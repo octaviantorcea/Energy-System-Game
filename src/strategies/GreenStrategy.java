@@ -15,6 +15,7 @@ public final class GreenStrategy extends AbstractStrategy{
 
     @Override
     public List<Producer> getNecessaryProducers() {
+        producerDatabase.sortAuxiliaryLists();
         List<Producer> necessaryProducers = new ArrayList<>();
         int energyStillNeeded = energyNeededKW;
         List<Producer> availableProducers = new ArrayList<>(producerDatabase.getGreenProducers());

@@ -8,6 +8,7 @@ import entities.Distributor;
 import entities.Producer;
 import fileio.InitialData;
 import fileio.InputDataLoader;
+import fileio.MonthlyUpdates;
 
 public final class Simulation {
     private static Simulation instance = null;
@@ -26,7 +27,15 @@ public final class Simulation {
                     final DistributorDatabase distributorDB,
                     final ProducerDatabase producerDB) {
         initialization(allData, consumerDB, distributorDB, producerDB);
+        simulateInitRound(consumerDB, distributorDB, producerDB);
 
+        //mockup
+        for (MonthlyUpdates monthlyUpdates : allData.getMonthlyUpdates()) {
+            simulateInitRound(consumerDB, distributorDB, producerDB);
+
+            //need to delete this it's just for debugging
+            producerDB.getProducers().forEach(producer -> producer.setNrOfSubbedDistributors(0));
+        }
     }
 
     /**
@@ -59,13 +68,20 @@ public final class Simulation {
             }
         });
 
-        producerDB.sortAuxiliaryLists();
         distributorDB.getDistributors().forEach(distributor -> distributor.setStrategy(producerDB));
     }
 
     private void simulateInitRound(final ConsumerDatabase consumerDB,
                                     final DistributorDatabase distributorDB,
                                     final ProducerDatabase producerDB) {
+        distributorDB.chooseProducers(producerDB);
+        distributorDB.computeProductionCosts();
+        distributorDB.computeContractPrices();
+        consumerDB.addAllIncomes();
+        consumerDB.signContracts(distributorDB);
+        consumerDB.payContracts();
+        distributorDB.payAllFees();
+        consumerDB.verifyBankruptcies();
     }
 
     /**

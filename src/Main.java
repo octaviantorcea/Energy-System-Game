@@ -37,5 +37,7 @@ public final class Main {
         System.out.println(consumerDatabase);
         System.out.println(distributorDatabase);
         System.out.println(producerDatabase);
+        //System.out.println(producerDatabase.getGreenProducers());
+        //System.out.println(producerDatabase.getNonGreenProducers());
     }
 }
