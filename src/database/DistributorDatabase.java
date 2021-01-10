@@ -26,11 +26,11 @@ public final class DistributorDatabase {
         return needNewProducers;
     }
 
-    public void chooseProducers(ProducerDatabase producerDatabase) {
+    public void chooseInitialProducers(ProducerDatabase producerDatabase) {
         distributors.forEach(distributor -> distributor.chooseProducers(producerDatabase));
     }
 
-    public void chooseNewProducers(ProducerDatabase producerDatabase) {
+    public void chooseProducers(ProducerDatabase producerDatabase) {
         Comparator<Distributor> idComparator = Comparator.comparing(Distributor::getId);
         needNewProducers.sort(idComparator);
         needNewProducers.forEach(distributor -> distributor.chooseNewProducers(producerDatabase));

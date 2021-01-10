@@ -71,15 +71,9 @@ public final class Simulation {
     private void simulateInitRound(final ConsumerDatabase consumerDB,
                                     final DistributorDatabase distributorDB,
                                     final ProducerDatabase producerDB) {
-        distributorDB.chooseProducers(producerDB);
+        distributorDB.chooseInitialProducers(producerDB);
         distributorDB.computeProductionCosts();
-        distributorDB.computeContractPrices();
-        consumerDB.addAllIncomes();
-        consumerDB.signContracts(distributorDB);
-        consumerDB.payContracts();
-        distributorDB.payAllFees();
-        consumerDB.verifyBankruptcies();
-        distributorDB.declareAllBankruptcies();
+        baseOperations(consumerDB, distributorDB);
     }
 
     private void simulateNormalRound(final ConsumerDatabase consumerDB,
@@ -89,20 +83,23 @@ public final class Simulation {
                                      final int month) {
         monthlyUpdates.changeInfCosts(distributorDB);
         monthlyUpdates.addNewConsumers(consumerDB);
+        baseOperations(consumerDB, distributorDB);
+        monthlyUpdates.modifyProducers(producerDB, distributorDB);
+        distributorDB.chooseProducers(producerDB);
+        distributorDB.getNeedNewProducers().clear();
+        distributorDB.computeProductionCosts();
+        producerDB.saveMonthlyStats(month);
+    }
+
+    private void baseOperations(final ConsumerDatabase consumerDB,
+                                final DistributorDatabase distributorDB) {
         distributorDB.computeContractPrices();
         consumerDB.addAllIncomes();
         consumerDB.signContracts(distributorDB);
         consumerDB.payContracts();
         distributorDB.payAllFees();
-        //<------------???why not here???-----------------------producerDB.saveMonthlyStats(month);
         consumerDB.verifyBankruptcies();
         distributorDB.declareAllBankruptcies();
-        monthlyUpdates.modifyProducers(producerDB, distributorDB);
-        ////////////////////////////////////////////distributorDB.chooseProducers(producerDB);
-        distributorDB.chooseNewProducers(producerDB);
-        distributorDB.getNeedNewProducers().clear();
-        distributorDB.computeProductionCosts();
-        producerDB.saveMonthlyStats(month);
     }
 
     /**
