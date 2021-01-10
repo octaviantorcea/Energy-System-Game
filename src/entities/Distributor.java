@@ -1,5 +1,6 @@
 package entities;
 
+import database.DistributorDatabase;
 import database.ProducerDatabase;
 import fileio.DistributorChanges;
 import fileio.DistributorInput;
@@ -52,15 +53,13 @@ public final class Distributor implements Observer {
     }
 
     public void chooseProducers(ProducerDatabase producerDatabase) {
-        if (this.needNewProducers && !this.isBankrupt) {
+        if (!this.isBankrupt) {
             energyProducers = this.strategy.getNecessaryProducers(); // puts every producer in list
             energyProducers.forEach(producer -> {
                 producer.addObserver(this); // add distributor in ObserverList of every producer
                 producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() + 1);
                 producer.getSubscribedDistributors().add(this);
             });
-
-            needNewProducers = false;
         }
     }
 
@@ -131,6 +130,18 @@ public final class Distributor implements Observer {
         infrastructureCost = distributorChanges.getInfrastructureCost();
     }
 
+    public void chooseNewProducers(ProducerDatabase producerDatabase) {
+        energyProducers.forEach(producer -> {
+            producer.deleteObserver(this);
+            producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
+            producer.getSubscribedDistributors().remove(this);
+        });
+
+        energyProducers.clear();
+
+        chooseProducers(producerDatabase);
+    }
+
     private int computeFees() {
         int nrClients = contracts.size();
         return infrastructureCost + productionCost * nrClients;
@@ -175,14 +186,15 @@ public final class Distributor implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         needNewProducers = true;
+        ((DistributorDatabase) arg).getNeedNewProducers().add(this);
 
-        energyProducers.forEach(producer -> {
-            producer.deleteObserver(this);
-            producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
-            producer.getSubscribedDistributors().remove(this);
-        });
-
-        energyProducers.clear();
+//        energyProducers.forEach(producer -> {
+//            producer.deleteObserver(this);
+//            producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
+//            producer.getSubscribedDistributors().remove(this);
+//        });
+//
+//        energyProducers.clear();
     }
 
     //for debugging

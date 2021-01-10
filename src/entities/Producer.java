@@ -1,6 +1,7 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import database.DistributorDatabase;
 import fileio.ProducerChanges;
 import fileio.ProducerInput;
 
@@ -43,10 +44,10 @@ public final class Producer extends Observable {
         monthlyStats.add(new MonthlyStats(month, subbedDistIds));
     }
 
-    public void modifyProducer(ProducerChanges producerChanges) {
+    public void modifyProducer(ProducerChanges producerChanges, DistributorDatabase distributorDB) {
         setChanged();
         energyPerDistributor = producerChanges.getEnergyPerDistributor();
-        notifyObservers();
+        notifyObservers(distributorDB);
     }
 
     public int getId() {

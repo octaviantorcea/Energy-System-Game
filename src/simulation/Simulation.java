@@ -95,9 +95,12 @@ public final class Simulation {
         consumerDB.payContracts();
         distributorDB.payAllFees();
         //<------------???why not here???-----------------------producerDB.saveMonthlyStats(month);
+        consumerDB.verifyBankruptcies();
         distributorDB.declareAllBankruptcies();
-        monthlyUpdates.modifyProducers(producerDB);
-        distributorDB.chooseProducers(producerDB);
+        monthlyUpdates.modifyProducers(producerDB, distributorDB);
+        ///////////////////////////////////////////////////////////distributorDB.chooseProducers(producerDB);
+        distributorDB.chooseNewProducers(producerDB);
+        distributorDB.getNeedNewProducers().clear();
         distributorDB.computeProductionCosts();
         producerDB.saveMonthlyStats(month);
     }

@@ -7,8 +7,7 @@ import entities.Consumer;
 import entities.Distributor;
 import entities.Producer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class that contains all the necessary data for output
@@ -38,6 +37,9 @@ public final class OutputHelperClass {
         }
 
         energyProducers = producerDatabase.getProducers();
+
+        energyProducers.forEach(producer -> producer.getMonthlyStats().forEach(monthlyStats ->
+                Collections.sort(monthlyStats.getDistributorsIds())));
     }
 
     public List<Consumer> getConsumers() {

@@ -3,6 +3,7 @@ package database;
 import entities.Distributor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -15,12 +16,24 @@ public final class DistributorDatabase {
      */
     private final List<Distributor> distributors = new ArrayList<>();
 
+    private final List<Distributor> needNewProducers = new ArrayList<>();
+
     public List<Distributor> getDistributors() {
         return distributors;
     }
 
+    public List<Distributor> getNeedNewProducers() {
+        return needNewProducers;
+    }
+
     public void chooseProducers(ProducerDatabase producerDatabase) {
         distributors.forEach(distributor -> distributor.chooseProducers(producerDatabase));
+    }
+
+    public void chooseNewProducers(ProducerDatabase producerDatabase) {
+        Comparator<Distributor> idComparator = Comparator.comparing(Distributor::getId);
+        needNewProducers.sort(idComparator);
+        needNewProducers.forEach(distributor -> distributor.chooseNewProducers(producerDatabase));
     }
 
     public void computeProductionCosts() {
