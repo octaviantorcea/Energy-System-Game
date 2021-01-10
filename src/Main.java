@@ -3,6 +3,7 @@ import database.ConsumerDatabase;
 import database.DistributorDatabase;
 import database.ProducerDatabase;
 import fileio.InputDataLoader;
+import fileio.OutputHelperClass;
 import simulation.Simulation;
 
 import java.io.File;
@@ -33,13 +34,10 @@ public final class Main {
 
         game.run(allData, consumerDatabase, distributorDatabase, producerDatabase);
 
+        OutputHelperClass outputClass = new OutputHelperClass(consumerDatabase,
+                                                                distributorDatabase,
+                                                                producerDatabase);
 
-
-        // for debugging
-        System.out.println(consumerDatabase);
-        System.out.println(distributorDatabase);
-        System.out.println(producerDatabase);
-        //System.out.println(producerDatabase.getGreenProducers());
-        //System.out.println(producerDatabase.getNonGreenProducers());
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(args[1]), outputClass);
     }
 }

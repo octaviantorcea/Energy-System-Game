@@ -135,6 +135,10 @@ public final class Distributor implements Observer {
         return id;
     }
 
+    public int getEnergyNeededKW() {
+        return energyNeededKW;
+    }
+
     public int getContractCost() {
         return contractCost;
     }
@@ -149,6 +153,10 @@ public final class Distributor implements Observer {
 
     public boolean isBankrupt() {
         return isBankrupt;
+    }
+
+    public EnergyChoiceStrategyType getProducerStrategy() {
+        return producerStrategy;
     }
 
     public Map<Consumer, Contract> getContracts() {

@@ -14,7 +14,7 @@ Verificarea alegerii in ordinea corecta, distributorului fiind suficient sa ia d
 4. 1 distributor, green strategy - 1 producer - renewable, 1 producer - renewable alt pret, 1 producer - non renewable
 
 5. 1 distributor, price strategy - la fel scenario #3
-6. 1 distributor, quantity strategy - 3 producers cu 3 cantitati diferite
+6. 1 distributor, quantity strategy - 3 energyProducers cu 3 cantitati diferite
 
 7. 1 distribuitor, price strategy - 3 distribuitori, doi avand cel mai bun pret, dar cantitati diferite
 8. 1 distribuitor, price strategy - 3 distribuitori, doi avand cel mai bun pret si cantitati egale

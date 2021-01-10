@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.ProducerChanges;
 import fileio.ProducerInput;
 
@@ -18,7 +19,9 @@ public final class Producer extends Observable {
     private EnergyType energyType;
     private int energyPerDistributor;
     private List<MonthlyStats> monthlyStats = new ArrayList<>();
+    @JsonIgnore
     private int nrOfSubbedDistributors;
+    @JsonIgnore
     private List<Distributor> subscribedDistributors = new ArrayList<>();
 
     public Producer(ProducerInput producerInput) {
@@ -50,16 +53,48 @@ public final class Producer extends Observable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getMaxDistributors() {
+        return maxDistributors;
+    }
+
+    public void setMaxDistributors(int maxDistributors) {
+        this.maxDistributors = maxDistributors;
+    }
+
     public double getPriceKW() {
         return priceKW;
+    }
+
+    public void setPriceKW(double priceKW) {
+        this.priceKW = priceKW;
+    }
+
+    public EnergyType getEnergyType() {
+        return energyType;
+    }
+
+    public void setEnergyType(EnergyType energyType) {
+        this.energyType = energyType;
     }
 
     public int getEnergyPerDistributor() {
         return energyPerDistributor;
     }
 
+    public void setEnergyPerDistributor(int energyPerDistributor) {
+        this.energyPerDistributor = energyPerDistributor;
+    }
+
     public List<MonthlyStats> getMonthlyStats() {
         return monthlyStats;
+    }
+
+    public void setMonthlyStats(List<MonthlyStats> monthlyStats) {
+        this.monthlyStats = monthlyStats;
     }
 
     public int getNrOfSubbedDistributors() {
