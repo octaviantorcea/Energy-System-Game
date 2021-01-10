@@ -49,12 +49,4 @@ public final class ProducerDatabase {
     public List<Producer> getNonGreenProducers() {
         return nonGreenProducers;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "ProducerDatabase{" +
-                "producers=" + producers +
-                '}';
-    }
 }

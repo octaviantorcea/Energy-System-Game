@@ -109,17 +109,4 @@ public final class Producer extends Observable {
     public List<Distributor> getSubscribedDistributors() {
         return subscribedDistributors;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "\nid=" + id +
-                "\nmaxDistributors=" + maxDistributors +
-                "\npriceKW=" + priceKW +
-                "\nenergyType=" + energyType +
-                "\nenergyPerDistributor=" + energyPerDistributor +
-                "\nmonthlyStats=" + monthlyStats +
-                "\nnrOfSubbedDistributors=" + nrOfSubbedDistributors +
-                "}\n";
-    }
 }

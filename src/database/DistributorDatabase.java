@@ -77,13 +77,4 @@ public final class DistributorDatabase {
     public void declareAllBankruptcies() {
         distributors.forEach(Distributor::declareBankruptcy);
     }
-
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "DistributorDatabase{" +
-                "distributors=" + distributors +
-                '}';
-    }
 }

@@ -98,7 +98,7 @@ public final class Simulation {
         consumerDB.verifyBankruptcies();
         distributorDB.declareAllBankruptcies();
         monthlyUpdates.modifyProducers(producerDB, distributorDB);
-        ///////////////////////////////////////////////////////////distributorDB.chooseProducers(producerDB);
+        ////////////////////////////////////////////distributorDB.chooseProducers(producerDB);
         distributorDB.chooseNewProducers(producerDB);
         distributorDB.getNeedNewProducers().clear();
         distributorDB.computeProductionCosts();

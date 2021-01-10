@@ -7,7 +7,9 @@ import entities.Consumer;
 import entities.Distributor;
 import entities.Producer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class that contains all the necessary data for output

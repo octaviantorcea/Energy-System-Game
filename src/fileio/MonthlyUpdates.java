@@ -43,7 +43,8 @@ public final class MonthlyUpdates {
                 consumerDB.getConsumers().add(new Consumer(newConsumer)));
     }
 
-    public void modifyProducers(final ProducerDatabase producerDB, final DistributorDatabase distributorDB) {
+    public void modifyProducers(final ProducerDatabase producerDB,
+                                final DistributorDatabase distributorDB) {
         producerChanges.forEach(producerChange -> {
             Producer modifiedProducer = producerDB.getProducers().get(producerChange.getId());
             modifiedProducer.modifyProducer(producerChange, distributorDB);

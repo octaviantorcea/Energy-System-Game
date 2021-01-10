@@ -187,26 +187,5 @@ public final class Distributor implements Observer {
     public void update(Observable o, Object arg) {
         needNewProducers = true;
         ((DistributorDatabase) arg).getNeedNewProducers().add(this);
-
-//        energyProducers.forEach(producer -> {
-//            producer.deleteObserver(this);
-//            producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() - 1);
-//            producer.getSubscribedDistributors().remove(this);
-//        });
-//
-//        energyProducers.clear();
-    }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "\nid=" + id +
-                "\nenergyNeededKW=" + energyNeededKW +
-                "\ncontractCost=" + contractCost +
-                "\nbudget=" + budget +
-                "\nproducerStrategy=" + producerStrategy +
-                "\nisBankrupt=" + isBankrupt +
-                "\ncontracts: " + contracts.values() +
-                "}\n";
     }
 }
