@@ -32,6 +32,11 @@ public final class Simulation {
         for (int i = 1; i <= allData.getNumberOfTurns(); i++) {
             simulateNormalRound(consumerDB, distributorDB, producerDB,
                     allData.getMonthlyUpdates().get(i - 1), i);
+
+            // if all distributors are bankrupt, the simulation stops
+            if (distributorDB.allBankrupt()) {
+                break;
+            }
         }
     }
 

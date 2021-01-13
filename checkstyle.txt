@@ -10,11 +10,6 @@ Starting audit...
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/entities/Distributor.java:131:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/ProducerDatabase.java:28:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/ProducerDatabase.java:37:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/DistributorDatabase.java:29:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/DistributorDatabase.java:33:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/DistributorDatabase.java:39:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/DistributorDatabase.java:43:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] /home/octavian/Desktop/OOP-Project-2/./src/database/DistributorDatabase.java:47:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/strategies/ChooseProducerStrategy.java:8:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/strategies/AbstractStrategy.java:19:5: Class 'AbstractStrategy' looks like designed for extension (can be subclassed), but the method 'getNextAvailableProducer' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'AbstractStrategy' final or making the method 'getNextAvailableProducer' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/strategies/StrategyFactory.java:10:5: Missing a Javadoc comment. [MissingJavadocMethod]
@@ -22,4 +17,4 @@ Starting audit...
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/fileio/MonthlyUpdates.java:41:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/octavian/Desktop/OOP-Project-2/./src/fileio/MonthlyUpdates.java:46:5: Missing a Javadoc comment. [MissingJavadocMethod]
 Audit done.
-Checkstyle ends with 22 errors.
+Checkstyle ends with 17 errors.

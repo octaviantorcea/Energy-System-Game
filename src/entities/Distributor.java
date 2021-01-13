@@ -145,6 +145,11 @@ public final class Distributor implements Observer {
         return infrastructureCost + productionCost * nrClients;
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        ((DistributorDatabase) arg).getNeedNewProducers().add(this);
+    }
+
     public int getId() {
         return id;
     }
@@ -179,10 +184,5 @@ public final class Distributor implements Observer {
 
     public int getContractLength() {
         return contractLength;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        ((DistributorDatabase) arg).getNeedNewProducers().add(this);
     }
 }
