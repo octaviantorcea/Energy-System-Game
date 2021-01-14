@@ -38,11 +38,21 @@ public final class MonthlyUpdates {
         });
     }
 
+    /**
+     * initializes all the new consumers and puts them in the database
+     * @param consumerDB consumer database
+     */
     public void addNewConsumers(final ConsumerDatabase consumerDB) {
         newConsumers.forEach(newConsumer ->
                 consumerDB.getConsumers().add(new Consumer(newConsumer)));
     }
 
+    /**
+     * applies modifyProducer method for each producer that is changed
+     * @see Producer#modifyProducer
+     * @param producerDB producer database
+     * @param distributorDB distributor database
+     */
     public void modifyProducers(final ProducerDatabase producerDB,
                                 final DistributorDatabase distributorDB) {
         producerChanges.forEach(producerChange -> {

@@ -28,11 +28,22 @@ public final class Distributor implements Observer {
     private int budget;
     private final EnergyChoiceStrategyType producerStrategy;
     private boolean isBankrupt;
+    /**
+     * A map of contracts <br>
+     * key - consumer <br>
+     * value - contract
+     */
     private final Map<Consumer, Contract> contracts = new LinkedHashMap<>();
     private final int contractLength;
     private int infrastructureCost;
     private int productionCost;
+    /**
+     * the strategy a distributor uses to choose the producers
+     */
     private ChooseProducerStrategy strategy;
+    /**
+     * a list with the producers to which this distributor is subscribed
+     */
     private List<Producer> energyProducers;
 
     public Distributor(final DistributorInput distributorInput) {
@@ -45,14 +56,16 @@ public final class Distributor implements Observer {
         this.isBankrupt = false;
     }
 
-    public void setStrategy(ProducerDatabase producerDatabase) {
-        this.strategy = StrategyFactory.getStrategyFactoryInstance()
-                .createStrategy(producerStrategy, energyNeededKW, producerDatabase);
-    }
-
+    /**
+     * chooses the necessary producers for the initialization round
+     * and adds this distributor as an observer for the chosen producers
+     * <p>
+     * also adds this distributor in the subscribed distributor list of the
+     * chosen producers
+     */
     public void chooseProducers() {
         if (!this.isBankrupt) {
-            energyProducers = this.strategy.getNecessaryProducers(); // puts every producer in list
+            energyProducers = this.strategy.getNecessaryProducers();
             energyProducers.forEach(producer -> {
                 producer.addObserver(this); // add distributor in ObserverList of every producer
                 producer.setNrOfSubbedDistributors(producer.getNrOfSubbedDistributors() + 1);
@@ -61,6 +74,9 @@ public final class Distributor implements Observer {
         }
     }
 
+    /**
+     * computes the production cost
+     */
     public void computeProductionCost() {
         if (!this.isBankrupt) {
             double cost = 0;
@@ -73,6 +89,9 @@ public final class Distributor implements Observer {
         }
     }
 
+    /**
+     * computes the price of the contract
+     */
     public void computeContractCost() {
         if (!this.isBankrupt) {
             int nrClients = contracts.size();
@@ -104,7 +123,8 @@ public final class Distributor implements Observer {
     }
 
     /**
-     * removes all the contracts this distributor has
+     * removes all the contracts this distributor has and removes this
+     * distributor from the distributor list of all its producers
      */
     public void declareBankruptcy() {
         if (isBankrupt && !contracts.isEmpty()) {
@@ -124,10 +144,20 @@ public final class Distributor implements Observer {
         }
     }
 
+    /**
+     * modifies the data from the distributor based on the input it gets
+     * @param distributorChanges data changes
+     */
     public void modifyInfCost(final DistributorChanges distributorChanges) {
         infrastructureCost = distributorChanges.getInfrastructureCost();
     }
 
+    /**
+     * chooses the necessary producers for a normal round<p>
+     * uses chooseProducer method but first it unsubscribes this distributor
+     * from every producer to which was subscribed last month
+     * @see Distributor#chooseProducers()
+     */
     public void chooseNewProducers() {
         energyProducers.forEach(producer -> {
             producer.deleteObserver(this);
@@ -176,6 +206,11 @@ public final class Distributor implements Observer {
 
     public EnergyChoiceStrategyType getProducerStrategy() {
         return producerStrategy;
+    }
+
+    public void setStrategy(ProducerDatabase producerDatabase) {
+        this.strategy = StrategyFactory.getStrategyFactoryInstance()
+                .createStrategy(producerStrategy, energyNeededKW, producerDatabase);
     }
 
     public Map<Consumer, Contract> getContracts() {

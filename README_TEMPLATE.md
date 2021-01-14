@@ -25,8 +25,6 @@ Biblioteci necesare pentru implementare:
 Tutorial Jackson JSON: 
 <https://ocw.cs.pub.ro/courses/poo-ca-cd/laboratoare/tutorial-json-jackson>
 
-[Puteti sa folositi si alte biblioteci si sa editati aceasta sectiune]
-
 ## Implementare
 
 ### Entitati
@@ -45,10 +43,3 @@ e.g Am folosit incapsulare pentru ... Am folosit abstractizare pentru ...
 ### Design patterns
 
 Ce design patterns ati folosit, cum le-ati adaptat problemei date
-
-### Dificultati intalnite, limitari, probleme
-
-e.g. pentru a rezolva problema X de checkstyle am facut ...
-
-[optional ## Feedback, comments
-

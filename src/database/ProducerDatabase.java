@@ -25,6 +25,10 @@ public final class ProducerDatabase {
      */
     private final List<Producer> nonGreenProducers = new ArrayList<>();
 
+    /**
+     * sorts the lists with green and non-green producers first by price, then
+     * by energy per distributor and then finally by id
+     */
     public void sortAuxiliaryLists() {
         Comparator<Producer> comparePriceQuantity = Comparator.comparing(Producer::getPriceKW)
                 .thenComparing(Producer::getEnergyPerDistributor, Comparator.reverseOrder())
@@ -34,6 +38,11 @@ public final class ProducerDatabase {
         nonGreenProducers.sort(comparePriceQuantity);
     }
 
+    /**
+     * Applies saveMonthlyStats method for all producers
+     * @param month the number of the month
+     * @see Producer#saveMonthlyStats
+     */
     public void saveMonthlyStats(int month) {
         producers.forEach(producer -> producer.saveMonthlyStats(month));
     }
