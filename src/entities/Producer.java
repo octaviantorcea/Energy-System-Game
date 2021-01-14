@@ -22,6 +22,9 @@ public final class Producer extends Observable {
     private List<MonthlyStats> monthlyStats = new ArrayList<>();
     @JsonIgnore
     private int nrOfSubbedDistributors;
+    /**
+     * a list with all distributors a producer has
+     */
     @JsonIgnore
     private final List<Distributor> subscribedDistributors = new ArrayList<>();
 
@@ -34,16 +37,31 @@ public final class Producer extends Observable {
         this.nrOfSubbedDistributors = 0;
     }
 
+    /**
+     * verifies if this producer can accept another distributor
+     * @return true if it can accept another distributor, false otherwise
+     */
     public boolean canHaveMoreDistributors() {
         return nrOfSubbedDistributors != maxDistributors;
     }
 
+    /**
+     * saves the monthly stats (ids of subscribed distributors) for the month
+     * given as argument
+     * @param month the number of the month for which the stats are saved
+     */
     public void saveMonthlyStats(int month) {
         List<Integer> subbedDistIds = new ArrayList<>();
         subscribedDistributors.forEach(distributor -> subbedDistIds.add(distributor.getId()));
         monthlyStats.add(new MonthlyStats(month, subbedDistIds));
     }
 
+    /**
+     * modifies this producer based on the input it gets from "producerChanges"
+     * @param producerChanges data changes
+     * @param distributorDB the database that has a list with all the distributors
+     * that need to be notified
+     */
     public void modifyProducer(ProducerChanges producerChanges, DistributorDatabase distributorDB) {
         setChanged();
         energyPerDistributor = producerChanges.getEnergyPerDistributor();

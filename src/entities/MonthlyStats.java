@@ -2,8 +2,17 @@ package entities;
 
 import java.util.List;
 
+/**
+ * class that keeps track of subscribed distributors in a month for a producer
+ */
 public final class MonthlyStats {
+    /**
+     * number of month
+     */
     private int month;
+    /**
+     * list with ids of subscribed distributors
+     */
     private List<Integer> distributorsIds;
 
     public MonthlyStats(int month, List<Integer> distributorsIds) {

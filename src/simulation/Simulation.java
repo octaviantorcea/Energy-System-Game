@@ -70,39 +70,69 @@ public final class Simulation {
             }
         });
 
+        // sets the strategy for every distributor
         distributorDB.getDistributors().forEach(distributor -> distributor.setStrategy(producerDB));
     }
 
+    /**
+     * simulates the initial round (where there are no monthly changes)
+     * @see Simulation#baseOperations
+     */
     private void simulateInitRound(final ConsumerDatabase consumerDB,
                                     final DistributorDatabase distributorDB) {
+        // 1. each distributor chooses the necessary producers
         distributorDB.chooseInitialProducers();
+        // 2. each distributor computes the production cost
         distributorDB.computeProductionCosts();
+        // 3. applies base operations
         baseOperations(consumerDB, distributorDB);
     }
 
+    /**
+     * simulates a normal round (where there are changes at the start of the round)
+     * @see Simulation#baseOperations
+     */
     private void simulateNormalRound(final ConsumerDatabase consumerDB,
                                      final DistributorDatabase distributorDB,
                                      final ProducerDatabase producerDB,
                                      final MonthlyUpdates monthlyUpdates,
                                      final int month) {
+        // 1. infrastructure cost changes
         monthlyUpdates.changeInfCosts(distributorDB);
+        // 2. adds new consumers
         monthlyUpdates.addNewConsumers(consumerDB);
+        // 3. applies base operations
         baseOperations(consumerDB, distributorDB);
+        // 4. applies changes for producers
         monthlyUpdates.modifyProducers(producerDB, distributorDB);
+        // 5. distributors choose new producers (if necessary)
         distributorDB.chooseProducers();
+        // 6. clear the list with all the distributors that needed new producers
         distributorDB.getNeedNewProducers().clear();
+        // 7. each distributor computes the new production cost
         distributorDB.computeProductionCosts();
+        // 8. producers save the monthly stats
         producerDB.saveMonthlyStats(month);
     }
 
+    /**
+     * operations that are common for both an initial round and for a normal round
+     */
     private void baseOperations(final ConsumerDatabase consumerDB,
                                 final DistributorDatabase distributorDB) {
+        // 1. each distributor updates contract prices
         distributorDB.computeContractPrices();
+        // 2. add income for each consumer
         consumerDB.addAllIncomes();
+        // 3. sign contract (where necessary) for consumers
         consumerDB.signContracts(distributorDB);
+        // 4. each consumer pays the contract
         consumerDB.payContracts();
+        // 5. each distributor pays the fee
         distributorDB.payAllFees();
+        // 6. verifies for bankruptcy every consumer
         consumerDB.verifyBankruptcies();
+        // 7. declares bankruptcy (where necessary) for distributors
         distributorDB.declareAllBankruptcies();
     }
 

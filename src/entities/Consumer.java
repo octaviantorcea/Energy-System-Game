@@ -82,22 +82,33 @@ public final class Consumer {
         }
     }
 
+    /**
+     * subtract (if possible) the contract price (+ penalty from last month) from the total budget;
+     * <p>
+     * if not possible apply penalty status;
+     * <p>
+     * if the consumer already has a penalty and cannot pay, then it's declared bankrupt;
+     * <p>
+     * if the consumer got a new contract to a different distributor and has a penalty that can
+     * be payed, he can delay the payment in the first month for the new contract
+     * @see Contract#payOneRound()
+     */
     public void payContract() {
         if (!this.isBankrupt) {
-            if (this.hasPenalty) { // if it has penalty
-                if (this.penaltyDistributor == contract.getDistributor()) { // and has the same dis
-                    if (contract.getPrice() + penalty > budget) { // and can't pay
+            if (this.hasPenalty) {
+                if (this.penaltyDistributor == contract.getDistributor()) {
+                    if (contract.getPrice() + penalty > budget) {
                         isBankrupt = true;
                         return;
-                    } else { // can pay
+                    } else {
                         contract.payOneRound();
                     }
-                } else { // and has another distributor
-                    if (contract.getPrice() + penalty > budget) { // and can't pay
-                        if (penalty > budget) { // and can't even pay only the penalty
+                } else {
+                    if (contract.getPrice() + penalty > budget) {
+                        if (penalty > budget) {
                             isBankrupt = true;
                             return;
-                        } else { // can pay at least the penalty
+                        } else {
                             budget -= penalty;
                             penaltyDistributor.setBudget(penaltyDistributor.getBudget() + penalty);
                             penalty = (int) Math.round(Math.floor(PENALTY_RATE
@@ -106,12 +117,12 @@ public final class Consumer {
                             contract.setRemainedContractMonths(contract.getRemainedContractMonths()
                                                                     - 1);
                         }
-                    } else { // can pay
+                    } else {
                         contract.payOneRound();
                     }
                 }
-            } else { // doesn't have penalty
-                if (contract.getPrice() > budget) { // and can't pay base contract
+            } else {
+                if (contract.getPrice() > budget) {
                     hasPenalty = true;
                     penalty = (int) Math.round(Math.floor(PENALTY_RATE * contract.getPrice()));
                     penaltyDistributor = contract.getDistributor();
@@ -121,6 +132,9 @@ public final class Consumer {
                 }
             }
 
+            /*
+             * if there are no more months left, that means the contract has expired
+             */
             if (contract.getRemainedContractMonths() == 0) {
                 hasContract = false;
             }
