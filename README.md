@@ -37,19 +37,19 @@ se initializeaza apoi bazele de date pentru consumatori, distribuitori si produc
 simularea.
 
 Simularea poate fi vazuta ca un joc ce contine mai multe etape:
-* <b><u>faza de initializare</b></u>: se creeaza consumatorii, distribuitorii si producatorii
+* <b>faza de initializare</b>: se creeaza consumatorii, distribuitorii si producatorii
   initiali, ce vor contine in acest moment doar datele parsate din fisierul de input
   (cautarea/semnarea/calcularea contractelor se realizeaza in faza urmatoare). Acestia vor fi
   distribuiti (intr-o lista) in bazele de date corespunzatoare fiecarei entitati. Tot in aceasta
   faza, fiecarui distribuitor ii este atribuita o strategie personalizata (aceasta nu se schimba pe
   parcursul simularii).
   
-* <b><u>runda initiala</b></u>: este alcatuita din mai multe etape:
+* <b>runda initiala</b>: este alcatuita din mai multe etape:
   1. fiecare distributor isi alege producatorii necesari si se aboneaza la ei
   2. fiecare distributor isi calculeaza pretul de productie
   3. se executa <u>operatiile de baza</u> (vezi mai jos)
   
-* <b><u>se simuleaza rundele normale</b></u>:
+* <b>se simuleaza rundele normale</b>:
   1. se updateaza costurile de infrastructura pentru fiecare distribuito
   2. se adauga in baza de date noii consumatori
   3. se executa <u>operatiile de baza</u> (vezi mai jos)
@@ -61,7 +61,7 @@ Simularea poate fi vazuta ca un joc ce contine mai multe etape:
   7. fiecare distribuitor isi calculeaza noul pret de productie
   8. producatorii salveaza datele lunare (ce distribuitori are ca abonati pentru runda respectiva)
   
-<b><u>OPERATIILE DE BAZA</b></u>: aceste operatii sunt comune atat rundei initiale, cat si unei runde
+<b>OPERATIILE DE BAZA</b>: aceste operatii sunt comune atat rundei initiale, cat si unei runde
 normale:
   1. fiecare distribuitor isi calculeaza pretul contractului
   2. se adauga salariile la bugetele consumatorilor
@@ -78,18 +78,18 @@ normale:
      cauta distribuitorii care au dat faliment in luna aceasta); consumatorii ce aveau contract la
      acest distribuitor vor fii marcati ca fara contract, iar lista cu contracte va fii golita
      
-* <b><u>dupa incheierea simularii</b></u>: se initializeaza o clasa 'OutputHelperClass' ce va
+<b>Dupa incheierea simularii</b>, se initializeaza o clasa 'OutputHelperClass' ce va
   contine informatiile ce trebuie parsate in fisierul de output.
 
 ### Design Patterns
-* <b><u>Singleton</b></u>:
+* <b>Singleton</b>:
     * pentru a avea o singura instanta de StrategyFactory
     * pentru a avea o singura instanta a simularii "jocului"
-* <b><u>Factory</b></u>:
+* <b>Factory</b>:
     * strategiile folosite de distribuitori sunt create cu ajutorul unui factory (StrategyFactory)
-* <b><u>Strategy</b></u>:
+* <b>Strategy</b>:
     * folosit pentru a alege modul in care distribuitorii isi aleg lunar producatorii
-* <b><u>Observer</b></u>:
+* <b>Observer</b>:
     * fiecare producator este un obiect observable
     * un distributor devine un observer al unui producator atunci cand se aboneaza la el
     * un distribuitor este "atentionat" atunci cand un producator isi schimba datele
