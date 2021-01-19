@@ -26,7 +26,7 @@ Tutorial Jackson JSON:
 <https://ocw.cs.pub.ro/courses/poo-ca-cd/laboratoare/tutorial-json-jackson>
 
 ## Implementare
-
+//TODO
 ### Entitati
 
 Clasele folosite, nu este nevoie sa enumerati proprietati si metode, 
