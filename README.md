@@ -19,9 +19,9 @@ Proiectare Orientata pe Obiecte, Seriile CA, CD
 ## Implementare
 
 ### Entitati
-
+//TODO
 ### Flow
-
+//TODO
 ### Design Patterns
 * Singleton:
     * pentru a avea o singura instanta de StrategyFactory
