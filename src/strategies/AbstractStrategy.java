@@ -8,7 +8,7 @@ import java.util.List;
 import static utils.Constants.FIRST;
 
 /**
- * Provides the skeleton for the strategies the distributors use.
+ * Provides the skeleton for the strategies the distributors use
  */
 public abstract class AbstractStrategy implements ChooseProducerStrategy {
     /**
