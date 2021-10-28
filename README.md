@@ -1,14 +1,8 @@
-Torcea Octavian 324CA
-
-# Proiect Energy System Etapa 2
+# Proiect Energy System
 
 ## Despre
 
-Proiectare Orientata pe Obiecte, Seriile CA, CD
-2020-2021
-
-<https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/proiect/etapa2>
-
+Proiect ce simuleaza un joc ce are la baza consumatori si distribuitori de energie electrica.
 
 ## Biblioteci necesare pentru implementare:
 * Jackson Annotations
@@ -50,7 +44,7 @@ Simularea poate fi vazuta ca un joc ce contine mai multe etape:
   3. se executa <u>operatiile de baza</u> (vezi mai jos)
   
 * <b>se simuleaza rundele normale</b>:
-  1. se updateaza costurile de infrastructura pentru fiecare distribuito
+  1. se updateaza costurile de infrastructura pentru fiecare distribuitor
   2. se adauga in baza de date noii consumatori
   3. se executa <u>operatiile de baza</u> (vezi mai jos)
   4. se modifica producatorii conform schimbarilor lunare; in acest moment sunt avertizati
@@ -93,6 +87,3 @@ normale:
     * fiecare producator este un obiect observable
     * un distributor devine un observer al unui producator atunci cand se aboneaza la el
     * un distribuitor este "atentionat" atunci cand un producator isi schimba datele
-
-
-<b>Repository-ul de github</b>: <https://github.com/octaviantorcea/OOP-Project-2>
